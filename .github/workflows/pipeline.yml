@@ -39,6 +39,7 @@ jobs:
       uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+       SONAR_HOST_URL: http://localhost:9000
     
 
     - name: Check Quality Gate
