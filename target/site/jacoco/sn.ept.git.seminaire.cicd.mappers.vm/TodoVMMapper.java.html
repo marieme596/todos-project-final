@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TodoVMMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">todos</a> &gt; <a href="index.source.html" class="el_package">sn.ept.git.seminaire.cicd.mappers.vm</a> &gt; <span class="el_source">TodoVMMapper.java</span></div><h1>TodoVMMapper.java</h1><pre class="source lang-java linenums">package sn.ept.git.seminaire.cicd.mappers.vm;
+
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import sn.ept.git.seminaire.cicd.dto.vm.TodoVM;
+import sn.ept.git.seminaire.cicd.mappers.generic.GenericMapper;
+import sn.ept.git.seminaire.cicd.models.Tag;
+import sn.ept.git.seminaire.cicd.models.Todo;
+import org.mapstruct.Mapper;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+
+@Mapper(componentModel = &quot;spring&quot;)
+public interface TodoVMMapper extends GenericMapper&lt;Todo, TodoVM&gt; {
+
+
+    @Override
+    @Mapping(source = &quot;tags&quot;, target = &quot;tags&quot;, qualifiedByName = &quot;asEntityQualifier&quot;)
+    Todo asEntity(TodoVM vm);
+
+    @Override
+    @Mapping(source = &quot;tags&quot;, target = &quot;tags&quot;, qualifiedByName = &quot;asDTOQualifier&quot;)
+    TodoVM asDTO(Todo todo);
+
+
+    @Named(&quot;asEntityQualifier&quot;)
+     static Set&lt;Tag&gt;  asEntityQualifier(Set&lt;UUID&gt; tags ) {
+<span class="fc" id="L30">        return Optional</span>
+<span class="fc" id="L31">                .ofNullable(tags)</span>
+<span class="fc" id="L32">                .orElse(new HashSet&lt;&gt;())</span>
+<span class="fc" id="L33">                .stream()</span>
+<span class="fc" id="L34">                .map(Tag::fromId)</span>
+<span class="fc" id="L35">                .collect(Collectors.toSet());</span>
+    }
+
+    @Named(&quot;asDTOQualifier&quot;)
+    static Set&lt;UUID&gt;  asDTOQualifier( Set&lt;Tag&gt;   tags ) {
+<span class="fc" id="L40">        return Optional</span>
+<span class="fc" id="L41">                .ofNullable(tags)</span>
+<span class="fc" id="L42">                .orElse(new HashSet&lt;&gt;())</span>
+<span class="fc" id="L43">                .stream()</span>
+<span class="fc" id="L44">                .map(Tag::getId)</span>
+<span class="fc" id="L45">                .collect(Collectors.toSet());</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TodoMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">todos</a> &gt; <a href="index.source.html" class="el_package">sn.ept.git.seminaire.cicd.mappers</a> &gt; <span class="el_source">TodoMapperImpl.java</span></div><h1>TodoMapperImpl.java</h1><pre class="source lang-java linenums">package sn.ept.git.seminaire.cicd.mappers;
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+import sn.ept.git.seminaire.cicd.dto.TagDTO;
+import sn.ept.git.seminaire.cicd.dto.TagDTO.TagDTOBuilder;
+import sn.ept.git.seminaire.cicd.dto.TodoDTO;
+import sn.ept.git.seminaire.cicd.dto.TodoDTO.TodoDTOBuilder;
+import sn.ept.git.seminaire.cicd.models.Tag;
+import sn.ept.git.seminaire.cicd.models.Tag.TagBuilder;
+import sn.ept.git.seminaire.cicd.models.Todo;
+import sn.ept.git.seminaire.cicd.models.Todo.TodoBuilder;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2023-09-14T03:16:18+0000&quot;,
+    comments = &quot;version: 1.3.1.Final, compiler: javac, environment: Java 11.0.11 (AdoptOpenJDK)&quot;
+)
+@Component
+<span class="fc" id="L22">public class TodoMapperImpl implements TodoMapper {</span>
+
+    @Override
+    public Todo asEntity(TodoDTO d) {
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if ( d == null ) {</span>
+<span class="nc" id="L27">            return null;</span>
+        }
+
+<span class="fc" id="L30">        TodoBuilder&lt;?, ?&gt; todo = Todo.builder();</span>
+
+<span class="fc" id="L32">        todo.id( d.getId() );</span>
+<span class="fc" id="L33">        todo.createdDate( d.getCreatedDate() );</span>
+<span class="fc" id="L34">        todo.lastModifiedDate( d.getLastModifiedDate() );</span>
+<span class="fc" id="L35">        todo.version( d.getVersion() );</span>
+<span class="fc" id="L36">        todo.enabled( d.isEnabled() );</span>
+<span class="fc" id="L37">        todo.deleted( d.isDeleted() );</span>
+<span class="fc" id="L38">        todo.title( d.getTitle() );</span>
+<span class="fc" id="L39">        todo.description( d.getDescription() );</span>
+<span class="fc" id="L40">        todo.completed( d.isCompleted() );</span>
+<span class="fc" id="L41">        todo.tags( tagDTOSetToTagSet( d.getTags() ) );</span>
+
+<span class="fc" id="L43">        return todo.build();</span>
+    }
+
+    @Override
+    public TodoDTO asDTO(Todo e) {
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if ( e == null ) {</span>
+<span class="nc" id="L49">            return null;</span>
+        }
+
+<span class="fc" id="L52">        TodoDTOBuilder&lt;?, ?&gt; todoDTO = TodoDTO.builder();</span>
+
+<span class="fc" id="L54">        todoDTO.id( e.getId() );</span>
+<span class="fc" id="L55">        todoDTO.createdDate( e.getCreatedDate() );</span>
+<span class="fc" id="L56">        todoDTO.lastModifiedDate( e.getLastModifiedDate() );</span>
+<span class="fc" id="L57">        todoDTO.version( e.getVersion() );</span>
+<span class="fc" id="L58">        todoDTO.enabled( e.isEnabled() );</span>
+<span class="fc" id="L59">        todoDTO.deleted( e.isDeleted() );</span>
+<span class="fc" id="L60">        todoDTO.title( e.getTitle() );</span>
+<span class="fc" id="L61">        todoDTO.description( e.getDescription() );</span>
+<span class="fc" id="L62">        todoDTO.completed( e.isCompleted() );</span>
+<span class="fc" id="L63">        todoDTO.tags( tagSetToTagDTOSet( e.getTags() ) );</span>
+
+<span class="fc" id="L65">        return todoDTO.build();</span>
+    }
+
+    protected Tag tagDTOToTag(TagDTO tagDTO) {
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if ( tagDTO == null ) {</span>
+<span class="nc" id="L70">            return null;</span>
+        }
+
+<span class="fc" id="L73">        TagBuilder&lt;?, ?&gt; tag = Tag.builder();</span>
+
+<span class="fc" id="L75">        tag.id( tagDTO.getId() );</span>
+<span class="fc" id="L76">        tag.createdDate( tagDTO.getCreatedDate() );</span>
+<span class="fc" id="L77">        tag.lastModifiedDate( tagDTO.getLastModifiedDate() );</span>
+<span class="fc" id="L78">        tag.version( tagDTO.getVersion() );</span>
+<span class="fc" id="L79">        tag.enabled( tagDTO.isEnabled() );</span>
+<span class="fc" id="L80">        tag.deleted( tagDTO.isDeleted() );</span>
+<span class="fc" id="L81">        tag.name( tagDTO.getName() );</span>
+<span class="fc" id="L82">        tag.description( tagDTO.getDescription() );</span>
+
+<span class="fc" id="L84">        return tag.build();</span>
+    }
+
+    protected Set&lt;Tag&gt; tagDTOSetToTagSet(Set&lt;TagDTO&gt; set) {
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if ( set == null ) {</span>
+<span class="nc" id="L89">            return null;</span>
+        }
+
+<span class="fc" id="L92">        Set&lt;Tag&gt; set1 = new HashSet&lt;Tag&gt;( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        for ( TagDTO tagDTO : set ) {</span>
+<span class="fc" id="L94">            set1.add( tagDTOToTag( tagDTO ) );</span>
+<span class="fc" id="L95">        }</span>
+
+<span class="fc" id="L97">        return set1;</span>
+    }
+
+    protected TagDTO tagToTagDTO(Tag tag) {
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if ( tag == null ) {</span>
+<span class="nc" id="L102">            return null;</span>
+        }
+
+<span class="fc" id="L105">        TagDTOBuilder&lt;?, ?&gt; tagDTO = TagDTO.builder();</span>
+
+<span class="fc" id="L107">        tagDTO.id( tag.getId() );</span>
+<span class="fc" id="L108">        tagDTO.createdDate( tag.getCreatedDate() );</span>
+<span class="fc" id="L109">        tagDTO.lastModifiedDate( tag.getLastModifiedDate() );</span>
+<span class="fc" id="L110">        tagDTO.version( tag.getVersion() );</span>
+<span class="fc" id="L111">        tagDTO.enabled( tag.isEnabled() );</span>
+<span class="fc" id="L112">        tagDTO.deleted( tag.isDeleted() );</span>
+<span class="fc" id="L113">        tagDTO.name( tag.getName() );</span>
+<span class="fc" id="L114">        tagDTO.description( tag.getDescription() );</span>
+
+<span class="fc" id="L116">        return tagDTO.build();</span>
+    }
+
+    protected Set&lt;TagDTO&gt; tagSetToTagDTOSet(Set&lt;Tag&gt; set) {
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        if ( set == null ) {</span>
+<span class="nc" id="L121">            return null;</span>
+        }
+
+<span class="fc" id="L124">        Set&lt;TagDTO&gt; set1 = new HashSet&lt;TagDTO&gt;( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        for ( Tag tag : set ) {</span>
+<span class="fc" id="L126">            set1.add( tagToTagDTO( tag ) );</span>
+<span class="fc" id="L127">        }</span>
+
+<span class="fc" id="L129">        return set1;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

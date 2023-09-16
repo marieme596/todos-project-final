@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TodoResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">todos</a> &gt; <a href="index.source.html" class="el_package">sn.ept.git.seminaire.cicd.resources</a> &gt; <span class="el_source">TodoResource.java</span></div><h1>TodoResource.java</h1><pre class="source lang-java linenums">package sn.ept.git.seminaire.cicd.resources;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import sn.ept.git.seminaire.cicd.dto.TodoDTO;
+import sn.ept.git.seminaire.cicd.dto.vm.TodoVM;
+import sn.ept.git.seminaire.cicd.services.ITodoService;
+import sn.ept.git.seminaire.cicd.utils.ResponseUtil;
+import sn.ept.git.seminaire.cicd.utils.UrlMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.Optional;
+import java.util.UUID;
+
+@RestController
+public class TodoResource {
+
+    private final ITodoService service;
+
+<span class="fc" id="L26">    public TodoResource(ITodoService service) {</span>
+<span class="fc" id="L27">        this.service = service;</span>
+<span class="fc" id="L28">    }</span>
+
+    @GetMapping(UrlMapping.Todo.ALL)
+    public ResponseEntity&lt;Page&lt;TodoDTO&gt;&gt; findAll(
+            @PageableDefault Pageable page
+    ) {
+<span class="fc" id="L34">        Page&lt;TodoDTO&gt; result = service.findAll(page);</span>
+<span class="fc" id="L35">        return ResponseEntity.ok().body(result);</span>
+    }
+
+    @GetMapping(UrlMapping.Todo.FIND_BY_ID)
+    public ResponseEntity&lt;TodoDTO&gt; findById(@PathVariable (&quot;id&quot;) UUID id) {
+<span class="fc" id="L40">        return ResponseUtil.wrapOrNotFound(service.findById(id),HttpStatus.OK);</span>
+    }
+
+    @PostMapping(UrlMapping.Todo.ADD)
+    public ResponseEntity&lt;TodoDTO&gt; create(@Valid @RequestBody TodoVM vm) {
+<span class="fc" id="L45">        TodoDTO created = service.save(vm);</span>
+        URI location = ServletUriComponentsBuilder
+<span class="fc" id="L47">                .fromCurrentRequest()</span>
+<span class="fc" id="L48">                .path(&quot;/{id}&quot;)</span>
+<span class="fc" id="L49">                .buildAndExpand(created.getId())</span>
+<span class="fc" id="L50">                .toUri();</span>
+<span class="fc" id="L51">        return ResponseEntity.created(location).body(created);</span>
+    }
+
+    @DeleteMapping(UrlMapping.Todo.DELETE)
+    public ResponseEntity&lt;TodoDTO&gt; delete(@PathVariable(&quot;id&quot;) UUID id) {
+<span class="fc" id="L56">        service.delete(id);</span>
+<span class="fc" id="L57">        return ResponseEntity.noContent().build();</span>
+    }
+
+    @PutMapping(UrlMapping.Todo.UPDATE)
+    public ResponseEntity&lt;TodoDTO&gt; update(
+            @PathVariable(&quot;id&quot;) UUID id,
+            @RequestBody @Valid TodoVM vm) {
+<span class="fc" id="L64">        final TodoDTO dto = service.update(id, vm);</span>
+<span class="fc" id="L65">        Optional&lt;TodoDTO&gt; optional = Optional.ofNullable(dto);</span>
+<span class="fc" id="L66">        return ResponseUtil.wrapOrNotFound(optional,HttpStatus.ACCEPTED);</span>
+    }
+
+
+    @DeleteMapping(UrlMapping.Todo.COMPLETE)
+    public ResponseEntity&lt;TodoDTO&gt; complete(@PathVariable(&quot;id&quot;) UUID id) {
+<span class="nc" id="L72">        final TodoDTO dto = service.complete(id);</span>
+<span class="nc" id="L73">        Optional&lt;TodoDTO&gt; optional = Optional.ofNullable(dto);</span>
+<span class="nc" id="L74">        return ResponseUtil.wrapOrNotFound(optional,HttpStatus.ACCEPTED);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Calculator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">todos</a> &gt; <a href="index.source.html" class="el_package">sn.ept.git.seminaire.cicd.demo</a> &gt; <span class="el_source">Calculator.java</span></div><h1>Calculator.java</h1><pre class="source lang-java linenums">package sn.ept.git.seminaire.cicd.demo;
+
+import sn.ept.git.seminaire.cicd.demo.exception.DivisionByZeroException;
+
+<span class="fc" id="L5">public class Calculator implements ICalculator {</span>
+
+    public static final String DIVIDE_BY_ZERO = &quot;Can not divide by zero&quot;;
+
+    @Override
+    public double add(double a, double b) {
+<span class="fc" id="L11">        return a+b;</span>
+    }
+
+    @Override
+    public double subtract(double a, double b) {
+<span class="fc" id="L16">        return  a-b;</span>
+    }
+
+    @Override
+    public double multiply(double a, double b) {
+<span class="fc" id="L21">        return  a*b;</span>
+    }
+
+    @Override
+    public double divide(double a, double b) throws DivisionByZeroException {
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if(b==0){</span>
+<span class="fc" id="L27">            throw new DivisionByZeroException(DIVIDE_BY_ZERO);</span>
+        }
+<span class="fc" id="L29">        return a/b;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TagVMMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">todos</a> &gt; <a href="index.source.html" class="el_package">sn.ept.git.seminaire.cicd.mappers.vm</a> &gt; <span class="el_source">TagVMMapperImpl.java</span></div><h1>TagVMMapperImpl.java</h1><pre class="source lang-java linenums">package sn.ept.git.seminaire.cicd.mappers.vm;
+
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+import sn.ept.git.seminaire.cicd.dto.vm.TagVM;
+import sn.ept.git.seminaire.cicd.dto.vm.TagVM.TagVMBuilder;
+import sn.ept.git.seminaire.cicd.models.Tag;
+import sn.ept.git.seminaire.cicd.models.Tag.TagBuilder;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2023-09-14T03:16:18+0000&quot;,
+    comments = &quot;version: 1.3.1.Final, compiler: javac, environment: Java 11.0.11 (AdoptOpenJDK)&quot;
+)
+@Component
+<span class="fc" id="L16">public class TagVMMapperImpl implements TagVMMapper {</span>
+
+    @Override
+    public Tag asEntity(TagVM d) {
+<span class="pc bpc" id="L20" title="1 of 2 branches missed.">        if ( d == null ) {</span>
+<span class="nc" id="L21">            return null;</span>
+        }
+
+<span class="fc" id="L24">        TagBuilder&lt;?, ?&gt; tag = Tag.builder();</span>
+
+<span class="fc" id="L26">        tag.id( d.getId() );</span>
+<span class="fc" id="L27">        tag.createdDate( d.getCreatedDate() );</span>
+<span class="fc" id="L28">        tag.lastModifiedDate( d.getLastModifiedDate() );</span>
+<span class="fc" id="L29">        tag.version( d.getVersion() );</span>
+<span class="fc" id="L30">        tag.enabled( d.isEnabled() );</span>
+<span class="fc" id="L31">        tag.deleted( d.isDeleted() );</span>
+<span class="fc" id="L32">        tag.name( d.getName() );</span>
+<span class="fc" id="L33">        tag.description( d.getDescription() );</span>
+
+<span class="fc" id="L35">        return tag.build();</span>
+    }
+
+    @Override
+    public TagVM asDTO(Tag e) {
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if ( e == null ) {</span>
+<span class="fc" id="L41">            return null;</span>
+        }
+
+<span class="fc" id="L44">        TagVMBuilder&lt;?, ?&gt; tagVM = TagVM.builder();</span>
+
+<span class="fc" id="L46">        tagVM.id( e.getId() );</span>
+<span class="fc" id="L47">        tagVM.createdDate( e.getCreatedDate() );</span>
+<span class="fc" id="L48">        tagVM.lastModifiedDate( e.getLastModifiedDate() );</span>
+<span class="fc" id="L49">        tagVM.version( e.getVersion() );</span>
+<span class="fc" id="L50">        tagVM.enabled( e.isEnabled() );</span>
+<span class="fc" id="L51">        tagVM.deleted( e.isDeleted() );</span>
+<span class="fc" id="L52">        tagVM.name( e.getName() );</span>
+<span class="fc" id="L53">        tagVM.description( e.getDescription() );</span>
+
+<span class="fc" id="L55">        return tagVM.build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
