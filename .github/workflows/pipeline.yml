@@ -38,8 +38,9 @@ jobs:
     # uses: SonarSource/sonarqube-quality-gate-action@d304d050d930b02a896b0f85935344f023928496
       uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
       env:
-       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-       SONAR_HOST_URL: http://localhost:9000
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
     
 
     - name: Check Quality Gate
